@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AppFinance</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity">Content</string>
+
+    <string-array name="name_list">
+        <item>Menu_1</item>
+        <item>Menu_2</item>
+        <item>Menu_3</item>
+        <item>Menu_4</item>
+        <item>Menu_5</item>
+        <item>Menu_6</item>
+        <item>Menu_7</item>
+        <item>Menu_8</item>
+        <item>Menu_9</item>
+        <item>Menu_10</item>
+    </string-array>
+
+
+</resources>
