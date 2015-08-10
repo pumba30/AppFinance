@@ -4,6 +4,7 @@
     <string name="title_activity">Content</string>
 
     <string-array name="name_list">
+        <item>Menu_0</item>
         <item>Menu_1</item>
         <item>Menu_2</item>
         <item>Menu_3</item>
@@ -14,6 +15,11 @@
         <item>Menu_8</item>
         <item>Menu_9</item>
         <item>Menu_10</item>
+        <item>Menu_11</item>
+        <item>Menu_12</item>
+        <item>Menu_13</item>
+        <item>Menu_14</item>
+        <item>Menu_15</item>
     </string-array>
 
 

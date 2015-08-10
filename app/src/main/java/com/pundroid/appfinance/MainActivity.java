@@ -1,8 +1,11 @@
 package com.pundroid.appfinance;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +15,9 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ACTIVITY = "activity";
+    public static final String ID_MENU_ITEM = "activity";
     private ListView menuList;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.name_list)));
         menuList.setOnItemClickListener(new DrawerItemClickListener());
 
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
     }
 
@@ -56,9 +61,22 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(MainActivity.this, Content.class);
-            intent.putExtra(ACTIVITY, id + 1);
-            startActivity(intent);
+            Fragment fragment = new ContentFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame, fragment);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            Bundle args = new Bundle();
+            args.putLong(ID_MENU_ITEM, id);
+            fragment.setArguments(args);
+            fragmentTransaction.commit();
+
+            drawer.closeDrawer(Gravity.LEFT);
+
+
+//            Intent intent = new Intent(MainActivity.this, ContentFragment.class);
+//            intent.putExtra(ID_MENU_ITEM, id);
+//            startActivity(intent);
         }
     }
 }
