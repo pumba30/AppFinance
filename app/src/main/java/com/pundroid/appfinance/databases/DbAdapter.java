@@ -62,9 +62,6 @@ public class DbAdapter {
     //////////////////////////////////////////////
     private class DbHelper extends SQLiteOpenHelper {
 
-//        private SQLiteDatabase database;
-//        private final Context context;
-
         //Takes and keeps a reference of the passed context in order to access to the application assets and resources.
         public DbHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
@@ -78,10 +75,9 @@ public class DbAdapter {
             Log.d(TAG, "constructor DbHelper");
         }
 
-        /**
-         * Creates a empty database on the system and rewrites it with your own database.
-         *  
-         */
+
+         // Creates a empty database on the system and rewrites it with your own database.
+
 
         public void createDataBase() throws IOException, SQLException {
             //If database not exists copy it from the assets
@@ -103,7 +99,7 @@ public class DbAdapter {
 
         private void copyDataBase() throws IOException {
 
-            //Open your local db as the input stream
+            //Open  local db as the input stream
             InputStream myInput = context.getAssets().open(DB_NAME);
 
             // Path to the just created empty db
@@ -124,11 +120,10 @@ public class DbAdapter {
             myInput.close();
         }
 
-        /**
-         *     Check if the database already exist to avoid re-copying the file each time you open the application.
-         *     @return true if it exists, false if it doesn't
-         *  
-         */
+
+         //    Check if the database already exist to avoid re-copying the file each time you open the application.
+         //   @return true if it exists, false if it doesn't
+
         private boolean checkDataBase() {
             File dbFile = new File(DB_PATH + DB_NAME);
             Log.d(TAG, dbFile + "   " + dbFile.exists());
@@ -160,10 +155,6 @@ public class DbAdapter {
 
         }
 
-
-        // Add your public helper methods to access and get content from the database.
-        // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-        // to you to create adapters for your views.
     }
 
 }
