@@ -4,6 +4,7 @@
     <string name="title_activity">Content</string>
 
     <string-array name="name_list">
+
         <item>Menu_0</item>
         <item>Menu_1</item>
         <item>Menu_2</item>
@@ -20,6 +21,35 @@
         <item>Menu_13</item>
         <item>Menu_14</item>
         <item>Menu_15</item>
+    </string-array>
+
+
+    <string name="menu_header_1">Menu Header 1</string>
+    <string name="menu_header_2">Menu Header 2</string>
+    <string name="menu_header_3">Menu Header 3</string>
+
+    <string-array name="menu_one">
+
+        <item>Menu_0</item>
+        <item>Menu_1</item>
+        <item>Menu_2</item>
+        <item>Menu_3</item>
+    </string-array>
+
+    <string-array name="menu_two">
+
+        <item>Menu_0</item>
+        <item>Menu_1</item>
+        <item>Menu_2</item>
+        <item>Menu_3</item>
+    </string-array>
+
+    <string-array name="menu_three">
+
+        <item>Menu_0</item>
+        <item>Menu_1</item>
+        <item>Menu_2</item>
+        <item>Menu_3</item>
     </string-array>
 
 

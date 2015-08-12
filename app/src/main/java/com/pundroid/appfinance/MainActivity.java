@@ -1,40 +1,52 @@
 package com.pundroid.appfinance;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
+import com.pundroid.appfinance.databases.DbAdapter;
+import com.pundroid.appfinance.gui.MenuExpandableList;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ID_MENU_ITEM = "activity";
-    private ListView menuList;
-    private DrawerLayout drawer;
+    public static final String TAG = MainActivity.class.getSimpleName();
+    private static MenuExpandableList menuExpandableList;
+    private DbAdapter dbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (menuExpandableList == null) {
+            menuExpandableList = new MenuExpandableList(this);
+        }
 
-        menuList = (ListView) findViewById(R.id.left_menu);
-        menuList.setAdapter(new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.name_list)));
-        menuList.setOnItemClickListener(new DrawerItemClickListener());
+         dbAdapter = new DbAdapter(this);
+        try {
+            Log.d(TAG, "create database");
+            dbAdapter.createDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        try {
+            dbAdapter.openDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        dbAdapter.getTransactionList();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,26 +69,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Fragment fragment = new ContentFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame, fragment);
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-
-            Bundle args = new Bundle();
-            args.putLong(ID_MENU_ITEM, id);
-            fragment.setArguments(args);
-            fragmentTransaction.commit();
-
-            drawer.closeDrawer(Gravity.LEFT);
-
-
-//            Intent intent = new Intent(MainActivity.this, ContentFragment.class);
-//            intent.putExtra(ID_MENU_ITEM, id);
-//            startActivity(intent);
-        }
-    }
 }
+
