@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import com.pundroid.appfinance.ContentFragment;
+import com.pundroid.appfinance.OperationFragment;
 import com.pundroid.appfinance.R;
 import com.pundroid.appfinance.adapters.MyExpandableListAdapter;
 
@@ -23,6 +23,7 @@ public class MenuExpandableList{
 
     private static final String TAG = MenuExpandableList.class.getSimpleName();
     public static final String ID_ITEM_MENU = "id_item_menu";
+    public static final String OPERATION_TYPE = "com.pundroid.appfinance.operationType";
 
     private Activity context;
     private DrawerLayout drawerLayout;
@@ -72,10 +73,10 @@ public class MenuExpandableList{
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
                 Log.d(TAG, "onChildClick");
-                ContentFragment fragment = new ContentFragment();
+                OperationFragment fragment = new OperationFragment();
 
                 Bundle args = new Bundle();
-                args.putLong(ID_ITEM_MENU, id);
+                args.putInt(OPERATION_TYPE, childPosition);
                 fragment.setArguments(args);
 
                 android.app.FragmentManager fragmentManager = context.getFragmentManager();

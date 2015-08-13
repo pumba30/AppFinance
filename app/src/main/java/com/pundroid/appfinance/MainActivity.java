@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.pundroid.appfinance.databases.DbAdapter;
 import com.pundroid.appfinance.gui.MenuExpandableList;
+import com.pundroid.appfinance.objects.AppGlobalContext;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
             menuExpandableList = new MenuExpandableList(this);
         }
 
-         dbAdapter = new DbAdapter(this);
+        Log.d(TAG, "onCreateMainActivity");
+
+        dbAdapter = AppGlobalContext.getInstanceDbAdapter();
         try {
             Log.d(TAG, "create database");
             dbAdapter.createDatabase();
@@ -36,14 +39,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        try {
-            dbAdapter.openDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        dbAdapter.getTransactionList();
 
     }
 
