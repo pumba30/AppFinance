@@ -5,7 +5,9 @@ package com.pundroid.appfinance.enums;
  */
 public enum OperationType {
 
-    INCOME("1"), SPENDING("2");
+    ALL("0"),
+    INCOME("1"),
+    SPENDING("2");
 
     private String id;
 

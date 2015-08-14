@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+
+    <LinearLayout
+        android:id="@+id/layout_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/img_source"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_launcher" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_oper_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/layout_image"
+        android:paddingBottom="2dp"
+        android:text="name"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txt_oper_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_oper_source"
+        android:layout_below="@+id/txt_oper_source"
+        android:text="amount"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_oper_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txt_oper_amount"
+        android:layout_alignBaseline="@id/txt_oper_amount"
+        android:text="currency"
+        android:paddingLeft="2dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_oper_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_oper_amount"
+        android:layout_below="@+id/txt_oper_amount"
+        android:text="date"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_oper_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/txt_oper_date"
+        android:layout_toRightOf="@id/txt_oper_date"
+        android:paddingLeft="2dp"
+        android:text="time"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_oper_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/txt_oper_time"
+        android:layout_toRightOf="@id/txt_oper_time"
+        android:paddingLeft="2dp"
+        android:text="type"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+
+
+</RelativeLayout>

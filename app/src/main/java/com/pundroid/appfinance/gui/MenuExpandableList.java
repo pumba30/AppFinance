@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by pumba30 on 10.08.2015.
  */
-public class MenuExpandableList{
+public class MenuExpandableList {
 
     private static final String TAG = MenuExpandableList.class.getSimpleName();
     public static final String ID_ITEM_MENU = "id_item_menu";
@@ -91,7 +91,6 @@ public class MenuExpandableList{
     }
 
 
-
     private void fillMenu() {
         listMenuGroup = new ArrayList<>();
         mapChildItemMenu = new HashMap<>();
@@ -120,7 +119,6 @@ public class MenuExpandableList{
         mapChildItemMenu.put(listMenuGroup.get(2), menu3);
 
     }
-
 
 
 }

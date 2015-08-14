@@ -1,64 +1,64 @@
 package com.pundroid.appfinance;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.pundroid.appfinance.adapters.OperationsAdapter;
 import com.pundroid.appfinance.enums.OperationType;
 import com.pundroid.appfinance.gui.MenuExpandableList;
 import com.pundroid.appfinance.objects.AppGlobalContext;
-import com.pundroid.appfinance.objects.Operation;
 
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Created by pumba30 on 11.08.2015.
  */
-public class OperationFragment extends Fragment {
+public class OperationFragment extends android.app.ListFragment {
     public static final String TAG = OperationFragment.class.getSimpleName();
-    private TextView textContent;
+
     private OperationType operationType;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_operations, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-        textContent = (TextView) view.findViewById(R.id.id_menu);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        int type = getArguments().getInt(MenuExpandableList.OPERATION_TYPE);
 
-        switch (getArguments().getInt(MenuExpandableList.OPERATION_TYPE)) {
+        switch (type) {
             case 0:
-                this.operationType = OperationType.INCOME;
+                this.operationType = OperationType.ALL;
+                Log.d(TAG, "operation type " + String.valueOf(type));
                 break;
             case 1:
-                this.operationType = OperationType.SPENDING;
+                this.operationType = OperationType.INCOME;
+                Log.d(TAG, "operation type " + String.valueOf(type));
                 break;
+            case 2:
+                this.operationType = OperationType.SPENDING;
+                Log.d(TAG, "operation type " + String.valueOf(type));
+                break;
+
         }
 
-        Log.d(TAG, "operation type "
-                + String.valueOf(getArguments().getInt(MenuExpandableList.OPERATION_TYPE)));
 
+        OperationsAdapter operationsAdapter = null;
         try {
-            fillTextContext();
+            operationsAdapter = new OperationsAdapter(getActivity(),
+                    AppGlobalContext.getInstanceDbAdapter().getOperations(operationType), false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return view;
+        setListAdapter(operationsAdapter);
+        AppGlobalContext.getInstanceDbAdapter().closeDatabase();
+
     }
 
-    private void fillTextContext() throws SQLException {
-        List<Operation> operationList = AppGlobalContext
-                .getInstanceDbAdapter().getOperations(operationType);
 
-        for (Operation operation : operationList) {
-            textContent.setText(textContent.getText() + operation.getAmount().toString() + "\n");
-        }
-    }
 }
